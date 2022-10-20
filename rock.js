@@ -4,6 +4,31 @@ function getComputerChoice () {
     const random = choices[Math.floor(Math.random()*choices.length)];
     return(random);
 }
+const btn1 = document.getElementById('btn1');
+const btn2 = document.getElementById('btn2');
+const btn3 = document.getElementById('btn3');
+
+console.log(btn1);
+
+// let run = getComputerChoice();
+// run = run.toString();
+// run = run.toUpperCase();
+//console.log(run);
+
+
+btn1.addEventListener('click', () => {
+    round('ROCK');
+} )
+
+btn2.addEventListener('click', () => {
+    round('PAPER');
+} )
+
+btn3.addEventListener('click', () => {
+    round('SCISSORS');
+} )
+
+
 // let run = getComputerChoice();
 // run = run.toString();
 // run = run.toUpperCase();
@@ -14,79 +39,103 @@ function getComputerChoice () {
 // playerSelection = playerSelection.toUpperCase();
 // console.log(playerSelection);
 let result;
+let win = 0;
+let lose = 0;
 
-function round () {
-    if ((playerSelection == "ROCK") && (run == "ROCK")) {
-         result = "tie";
+function round (playerSelection) {
+    console.log(playerSelection);
+    let run = getComputerChoice();
+    run = run.toString();
+    run = run.toUpperCase();
+    console.log(run);
+    if((win < 5) && (lose < 5)) {
+        if ((playerSelection == "ROCK") && (run == "ROCK")) {
+            result = "tie";
+        }
+        else if ((playerSelection == "ROCK") && (run == "PAPER")) {
+            result = "lose";
+            lose = lose+1;
+        }
+        else if ((playerSelection == "ROCK") && (run == "SCISSORS")) {
+            result = "win";
+            win = win+1;
+        }
+        else if ((playerSelection == "PAPER") && (run == "PAPER")) {
+            result = "tie";
+        }
+        else if ((playerSelection == "PAPER") && (run == "SCISSORS")) {
+            result = "lose";
+            lose = lose+1;
+        }
+        else if ((playerSelection == "PAPER") && (run == "ROCK")) {
+            result = "win";
+            win = win+1;
+        }
+        else if ((playerSelection == "SCISSORS") && (run == "ROCK")) {
+            result = "lose";
+            lose = lose+1;
+        }
+        else if ((playerSelection == "SCISSORS") && (run == "SCISSORS")) {
+            result = "tie";
+        }
+        else if ((playerSelection == "SCISSORS") && (run == "PAPER")) {
+            win = win+1;
+            result = "win";
+        }
     }
-    else if ((playerSelection == "ROCK") && (run == "PAPER")) {
-         result = "lose";
+    if (win == 5) {
+        document.write("Game Over, You Win!");
     }
-    else if ((playerSelection == "ROCK") && (run == "SCISSORS")) {
-         result = "win";
+    else if (lose == 5) {
+        document.write("Game Over, You Lose! Final Score: You: " + win + ", Computer: " + lose);
     }
-    else if ((playerSelection == "PAPER") && (run == "PAPER")) {
-         result = "tie";
-    }
-    else if ((playerSelection == "PAPER") && (run == "SCISSORS")) {
-         result = "lose";
-    }
-    else if ((playerSelection == "PAPER") && (run == "ROCK")) {
-         result = "win";
-    }
-    else if ((playerSelection == "SCISSORS") && (run == "ROCK")) {
-         result = "lose";
-    }
-    else if ((playerSelection == "SCISSORS") && (run == "SCISSORS")) {
-         result = "tie";
-    }
-    else if ((playerSelection == "SCISSORS") && (run == "PAPER")) {
-         result = "win";
-    }
+    document.getElementById("roundRes").innerHTML = "Round Result = " + result;
+    document.getElementById("live").innerHTML = "Current Score: You: " + win + ", Computer: " + lose;
+    console.log(result);
     return(result);
 }
 
-let win = 0;
-let lose = 0;
-let final;
-let roundResult;
+// Previous code:
 
-let run;
-let playerSelection;
+// let final;
+// let roundResult;
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        run = getComputerChoice();
-        run = run.toString();
-        run = run.toUpperCase();
-        console.log(run);
+// let run;
+//let playerSelection;
 
-        playerSelection = window.prompt("Choose Rock, Paper, or Scissors");
-        playerSelection = playerSelection.toString();
-        playerSelection = playerSelection.toUpperCase();
-        console.log(playerSelection);
+// function game() {
+//     //for (let i = 0; i < 5; i++) {
+//         // run = getComputerChoice();
+//         // run = run.toString();
+//         // run = run.toUpperCase();
+//         // console.log(run);
 
-        roundResult = round();
-        console.log(roundResult);
+//         playerSelection = window.prompt("Choose Rock, Paper, or Scissors");
+//         playerSelection = playerSelection.toString();
+//         playerSelection = playerSelection.toUpperCase();
+//         console.log(playerSelection);
 
-        if (roundResult == "win") {
-            win = win + 1;
-        }
-        else if (roundResult == "lose") {
-            lose = lose + 1;
-        }
-    }
-    if (win > lose) {
-        final = "You win";
-    }
-    else if (win < lose) {
-        final = "You lose";
-    }
-    else if (win == lose) {
-        final = "It is a tie";
-    }
-    return (final);
-}
+//         roundResult = round();
+//         console.log(roundResult);
 
-let finalResult = game();
-console.log(finalResult);
+//         if (roundResult == "win") {
+//             win = win + 1;
+//         }
+//         else if (roundResult == "lose") {
+//             lose = lose + 1;
+//         }
+//     }
+//     // if (win > lose) {
+//     //     final = "You win";
+//     // }
+//     // else if (win < lose) {
+//     //     final = "You lose";
+//     // }
+//     // else if (win == lose) {
+//     //     final = "It is a tie";
+//     // }
+//     // return (final);
+// //}
+
+// let finalResult = game();
+// console.log(finalResult);
